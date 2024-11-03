@@ -7,12 +7,13 @@ on:
   push:
     branches:
       - main
-      
+
+run-name: Deploy Spectre Node to Testnet - ${{ inputs.release_tag }} by @${{ github.actor }}
+
 env:
   ENVIRONMENT: 'TESTNET'
   REGISTRY: 'ghcr.io'
   TAG: 'latest'
-  AWS_TESTNET: '${{ secrets.AWS_ARN }}'
 
 jobs:
   push:
@@ -60,13 +61,16 @@ jobs:
     needs: push
     name: deploy
     runs-on: ubuntu-latest
+    environment: testnet
     strategy:
       matrix:
         spectre_id: [0]
-
     permissions:
       contents: read
       id-token: write
+    env: 
+      AWS_TESTNET: '${{ secrets.AWS_TESTNET }}'
+      AWS_REGION: '${{ secrets.AWS_REGION }}'
 
     steps:
       - name: checkout ecs repo
@@ -84,7 +88,7 @@ jobs:
           variables: |
             spectreId=${{ matrix.spectre_id }}
             awsAccountId=${{ env.AWS_TESTNET }}
-            awsRegion=${{ secrets.AWS_REGION }}
+            awsRegion=${{ env.AWS_REGION }}
             awsEfs=${{ secrets.SPECTRE_EFS_TESTNET }}
             imageTag=${{ github.ref_name }}
 
@@ -92,7 +96,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ env.AWS_TESTNET }}:role/github-actions-${{ env.ENVIRONMENT }}-chainbridge
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
           role-session-name: GithubActions
 
       - name: deploy task definition
