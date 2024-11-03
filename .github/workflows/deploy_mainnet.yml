@@ -11,11 +11,10 @@ on:
         required: true
         type: string
 
-  
+run-name: Deploy Spectre Node to Mainnet - ${{ inputs.release_tag }} by @${{ github.actor }}
+
 env:
-  AWS_REGION: '${{ secrets.AWS_REGION }}'
   ENVIRONMENT: MAINNET
-  AWS_MAINNET: '${{ secrets.AWS_MAINNET }}'
   REGISTRY: 'ghcr.io'
   VERSION: ${{ inputs.release_tag }}
   
@@ -23,12 +22,14 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
-  
+    environment: mainnet
     permissions:
       contents: read
       id-token: write
       actions: write
-  
+    env:
+      AWS_REGION: '${{ secrets.AWS_REGION }}'
+      AWS_MAINNET: '${{ secrets.AWS_MAINNET }}'
     steps:
       - name: Authorised User only
         run: |
