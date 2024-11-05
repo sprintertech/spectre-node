@@ -89,7 +89,7 @@ jobs:
             spectreId=${{ matrix.spectre_id }}
             awsAccountId=${{ env.AWS_TESTNET }}
             awsRegion=${{ env.AWS_REGION }}
-            awsEfs=${{ secrets.SPECTRE_EFS_TESTNET }}
+            awsEfs=${{ secrets.SPECTRE_EFS }}
             imageTag=${{ github.ref_name }}
 
       - name: configure aws credentials

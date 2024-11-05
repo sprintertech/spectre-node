@@ -56,7 +56,7 @@ jobs:
             awsRegion=${{ env.AWS_REGION }}
             awsEnv=${{ env.ENVIRONMENT }}
             imageTag=${{ env.VERSION }}
-            awsEfs=${{ secrets.SPECTRE_EFS_MAINNET }}
+            awsEfs=${{ secrets.SPECTRE_EFS }}
   
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
