@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/sygmaprotocol/spectre-node/compare/v1.0.0...v1.0.1) (2024-11-06)
+
+
+### Miscellaneous
+
+* Access Secrets based on segregated environments ([#51](https://github.com/sygmaprotocol/spectre-node/issues/51)) ([177b285](https://github.com/sygmaprotocol/spectre-node/commit/177b28548d3a9a33aa89fe6a9663ea9d5d8da4f2))
+
 ## 1.0.0 (2024-10-04)
 
 
