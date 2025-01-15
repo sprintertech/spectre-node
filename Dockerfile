@@ -17,5 +17,5 @@ COPY --from=builder /spectre ./
 RUN chmod +x ./spectre
 RUN mkdir -p /mount
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-LABEL org.opencontainers.image.source https://github.com/sygmaprotocol/spectre-node
+LABEL org.opencontainers.image.source https://github.com/sprintertech/spectre-node
 ENTRYPOINT ["./spectre"]
